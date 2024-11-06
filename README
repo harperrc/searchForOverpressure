@@ -1,0 +1,13 @@
+using Speicher & Brode equations from PSR-1413-3 to compute the 'optimum'
+height of burst and associated ground range
+uses brents method
+reasonablly fast
+
+the nukemap data comes from the javascript code on the nukemap website
+
+tcsh script files 
+   runop  overpressures at 1Kt
+   rundp  dynamic pressures at 1Kt
+
+you could easily run the codes at different yields or just use the 1Kt data
+and cube root scale

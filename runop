@@ -1,0 +1,57 @@
+#
+set ovp = (10000 9000 8000 7000 6000 5000 4000 3000 2000 1500 1000 900 700 600 500 400 300 200 150 100 90 80 70 60 50 40 30 20 15 12 10 9 8 7 6 5 4 3 2 1)
+
+set dlr = \$
+
+if (-e des) then
+   rm des
+endif
+
+set addopt = 'no'
+
+set runcode = 'yes'
+if ($#argv > 0) then
+   set runcode = 'no'
+endif
+
+if ($runcode == "yes") then
+   if (-e maxdat) then
+      rm maxdat
+   endif
+
+   touch maxdat
+endif
+
+@ id = 1
+while ($id <= $#ovp)
+   @ o   = $ovp[$id]
+
+   if ($runcode == "yes") then
+      set ans = `searchForOVP.py $o $o`
+      printf "%15.5f %15.5f %15.5f\n" $ans[1] $ans[2] $ans[3] >> maxdat
+   endif
+
+   echo "working on " $o
+   echo "set title '$o PSI'" >> des
+   if ($runcode == "yes") then
+      echo "set xrange["$ans[4]":"$ans[5]"]" >> des
+      echo "set yrange["$ans[6]":"$ans[7]"]" >> des
+   endif
+   echo "p 'nukemap' u ($dlr"1" == $o ? $dlr"2": 1/0):3 pt 2 ps 1 lw 2 tit 'nukemap',\\" >> des
+
+   if ($addopt == 'no') then
+      set xtra = ''
+   else
+      set xtra = ',\\'
+   endif
+
+   set out = $o".plt"
+   echo "'$out' u 1:2 @ml4 tit '$o'$xtra" >> des
+   if ($addopt == 'yes') then
+      echo "'tmp' u 4:5 @ml4 tit 'opt'" >> des
+   endif
+
+   echo "pause -1" >> des
+
+   @ id = $id + 1
+end
