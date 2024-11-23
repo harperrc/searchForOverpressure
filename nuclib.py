@@ -308,7 +308,7 @@ def timar(grft,hobft,yld):
    tau = u
 
    if (x < xm):
-      return (tau * 0.001)
+      return (tau * 0.001 * y13)
 
 #  if in mach region
 
@@ -324,7 +324,7 @@ def timar(grft,hobft,yld):
 
 #  N.B. tau in milliseconds so multiply by 0.001 when returning
 
-   return (tau * 0.001)
+   return (tau * 0.001 * y13)
 
 def rootc(p,q,r,ylo,yhi):
 #
