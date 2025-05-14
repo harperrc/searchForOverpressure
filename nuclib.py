@@ -249,8 +249,8 @@ def idealOverpressureKm(grkm,hobkm,yld):
 
 #  convert to feet
 
-   grft   = gfkm * m2ft * 1000.0
-   hobftt = hobkm * m2ft * 1000.0
+   grft  = grkm * m2ft * 1000.0
+   hobft = hobkm * m2ft * 1000.0
 
    ovp  = idealOverpressureFt(grft,hobft,yld)
 
